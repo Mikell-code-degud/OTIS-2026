@@ -138,7 +138,7 @@ static void printTable(const std::vector<Row>& rows)
 
 int main()
 {
-#ifdef _WWIN32
+#ifdef _WIN32
     SetConsoleOutputCP(65001);
 #endif
     std::cout << "============================================\n";
