@@ -1,8 +1,4 @@
-cmake_minimum_required(VERSION 3.5)
-project(OTIS)
+cmake_minimum_required(VERSION 3.15)
+project(OTIS LANGUAGES CXX)
 
-file(GLOB V_GLOB RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} "src/")
-foreach(item ${V_GLOB})
-    message("Find \"${item}\"")
-    add_subdirectory(${item})
-endforeach()
+add_subdirectory(src)
