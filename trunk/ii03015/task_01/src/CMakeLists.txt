@@ -13,4 +13,3 @@ add_executable(otis_task_01
     InputSignal.cpp
 )
 
-target_include_directories(otis_task_01 PRIVATE src)
