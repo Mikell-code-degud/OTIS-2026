@@ -135,6 +135,9 @@ static void printTable(const std::vector<Row>& rows)
 
 int main()
 {
+#ifdef _WWIN32
+    SetConsoleOutputCP(65001);
+#endif
     std::cout << "============================================\n";
     std::cout << " OTIS-2026 | Лабораторная работа №1\n";
     std::cout << " Вариант 6, Низамутдинов М.А.\n";
