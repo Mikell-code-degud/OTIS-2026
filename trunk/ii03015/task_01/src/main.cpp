@@ -5,9 +5,6 @@
 #include <memory>
 #include <string>
 #include <vector>
-#ifdef _WIN32
-#include <windows.h>
-#endif
 
 #include "InputSignal.h"
 #include "Model.h"
@@ -52,52 +49,59 @@ static double readDouble(const std::string& prompt)
 
 static SignalType readSignalType()
 {
-    const int choice = readInt(
-        "\nТип входного воздействия:\n"
-        "1 - ступенчатое\n"
-        "2 - импульсное\n"
-        "3 - гармоническое\n"
-        "Ваш выбор: ", 1);
-    if (choice > 3)
-        return readSignalType();
-    return static_cast<SignalType>(choice);
+    while (true)
+    {
+        const int choice = readInt(
+            "\nТип входного воздействия:\n"
+            "1 - ступенчатое\n"
+            "2 - импульсное\n"
+            "3 - гармоническое\n"
+            "Ваш выбор: ", 1);
+
+        if (choice <= 3)
+            return static_cast<SignalType>(choice);
+
+        std::cout << "Нет такого варианта. Повторите.\n";
+    }
 }
 
 static std::unique_ptr<Model> createModel()
 {
-    const int choice = readInt(
-        "\nВыберите модель:\n"
-        "1 - Model 1.6\n"
-        "2 - Model 2.8\n"
-        "3 - Model 3.10\n"
-        "Ваш выбор: ", 1);
+    while (true)
+    {
+        const int choice = readInt(
+            "\nВыберите модель:\n"
+            "1 - Model 1.6\n"
+            "2 - Model 2.8\n"
+            "3 - Model 3.10\n"
+            "Ваш выбор: ", 1);
 
-    switch (choice)
-    {
-    case 1:
-    {
-        const double a1 = readDouble("a1 = ");
-        const double a2 = readDouble("a2 = ");
-        const double a3 = readDouble("a3 = ");
-        const double b  = readDouble("b  = ");
-        return std::make_unique<Model1_6>(a1, a2, a3, b);
-    }
-    case 2:
-    {
-        const double a = readDouble("a = ");
-        const double b = readDouble("b = ");
-        const double c = readDouble("c = ");
-        return std::make_unique<Model2_8>(a, b, c);
-    }
-    case 3:
-    {
-        const double a = readDouble("a = ");
-        const double b = readDouble("b = ");
-        return std::make_unique<Model3_10>(a, b);
-    }
-    default:
-        std::cout << "Нет такой модели. Повторите выбор.\n";
-        return createModel();
+        switch (choice)
+        {
+        case 1:
+        {
+            const double a1 = readDouble("a1 = ");
+            const double a2 = readDouble("a2 = ");
+            const double a3 = readDouble("a3 = ");
+            const double b  = readDouble("b  = ");
+            return std::make_unique<Model1_6>(a1, a2, a3, b);
+        }
+        case 2:
+        {
+            const double a = readDouble("a = ");
+            const double b = readDouble("b = ");
+            const double c = readDouble("c = ");
+            return std::make_unique<Model2_8>(a, b, c);
+        }
+        case 3:
+        {
+            const double a = readDouble("a = ");
+            const double b = readDouble("b = ");
+            return std::make_unique<Model3_10>(a, b);
+        }
+        default:
+            std::cout << "Нет такой модели. Повторите выбор.\n";
+        }
     }
 }
 
@@ -131,10 +135,6 @@ static void printTable(const std::vector<Row>& rows)
 
 int main()
 {
-#ifdef _WIN32
-    SetConsoleCP(65001);
-    SetConsoleOutputCP(65001);
-#endif
     std::cout << "============================================\n";
     std::cout << " OTIS-2026 | Лабораторная работа №1\n";
     std::cout << " Вариант 6, Низамутдинов М.А.\n";
@@ -152,7 +152,6 @@ int main()
 
     std::vector<Row> rows;
     rows.reserve(n + 1);
-
     double y = y0;
     double yPrev = y0;
     double yPrev2 = y0;
@@ -174,6 +173,10 @@ int main()
     saveCsv(rows);
 
     system("python plot.py");
-    system("pause");
+
+    std::cout << "\nНажмите Enter для выхода...";
+    std::cin.ignore();
+    std::cin.get();
+
     return 0;
 }
