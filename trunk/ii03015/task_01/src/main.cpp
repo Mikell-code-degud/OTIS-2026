@@ -162,16 +162,16 @@ int main()
     double yPrev = y0;
     double yPrev2 = y0;
 
-    rows.push_back({0, getInput(signal, 0, amplitude), y});
+    rows.push_back({0, generalInput(signal, 0, amplitude), y});
 
     for (int tau = 0; tau < n; ++tau)
     {
-        const double u = getInput(signal, tau, amplitude);
+        const double u = generalInput(signal, tau, amplitude);
         const double nextY = model->calculateNext(y, yPrev, yPrev2, u, dt);
         yPrev2 = yPrev;
         yPrev = y;
         y = nextY;
-        rows.push_back({tau + 1, getInput(signal, tau + 1, amplitude), y});
+        rows.push_back({tau + 1, generalInput(signal, tau + 1, amplitude), y});
     }
 
     std::cout << "\nМодель: " << model->getName() << '\n';
