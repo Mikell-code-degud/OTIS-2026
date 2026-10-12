@@ -7,4 +7,4 @@ enum class SignalType
     Harmonic = 3
 };
 
-double getInput(SignalType type, int tau, double amplitude);
+double generalInput(SignalType type, int tau, double amplitude);
