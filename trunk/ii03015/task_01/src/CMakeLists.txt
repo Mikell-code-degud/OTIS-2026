@@ -5,7 +5,7 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
-add_executable(otis_task_01
+add_executable(otis_task_01_ii03015
     main.cpp
     Model1_6.cpp
     Model2_8.cpp
