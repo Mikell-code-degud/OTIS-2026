@@ -4,7 +4,8 @@
 class Model3_10 final : public Model
 {
 private:
-    double a, b;
+    double a;
+    double b;
 
 public:
     Model3_10(double a, double b);
