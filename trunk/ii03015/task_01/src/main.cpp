@@ -59,7 +59,7 @@ static SignalType readSignalType()
             "1 - ступенчатое\n"
             "2 - импульсное\n"
             "3 - гармоническое\n"
-            "Ваш выбор: ", 1); <= 3)
+            "Ваш выбор: ", 1); choice <= 3)
             return static_cast<SignalType>(choice);
 
         std::cout << "Нет такого варианта. Повторите.\n";
