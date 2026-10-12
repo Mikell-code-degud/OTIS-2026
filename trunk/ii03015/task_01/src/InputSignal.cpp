@@ -1,7 +1,7 @@
 #include "InputSignal.h"
 #include <cmath>
 
-double getInput(SignalType type, int tau, double amplitude)
+double generalInput(SignalType type, int tau, double amplitude)
 {
     switch (type)
     {
