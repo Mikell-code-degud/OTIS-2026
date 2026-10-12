@@ -54,14 +54,12 @@ static SignalType readSignalType()
 {
     while (true)
     {
-        const int choice = readInt(
+        if (const int choice = readInt(
             "\nТип входного воздействия:\n"
             "1 - ступенчатое\n"
             "2 - импульсное\n"
             "3 - гармоническое\n"
-            "Ваш выбор: ", 1);
-
-        if (choice <= 3)
+            "Ваш выбор: ", 1); <= 3)
             return static_cast<SignalType>(choice);
 
         std::cout << "Нет такого варианта. Повторите.\n";
