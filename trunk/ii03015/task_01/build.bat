@@ -16,7 +16,7 @@ cmake -S . -B build -G "Visual Studio 17 2022" -A x64
 if errorlevel 1 goto error
 
 echo STAGE 2 Compilation
-cmake --build build --config Release --target otis_task_01
+cmake --build build --config Release --target otis_task_01_ii03015
 if errorlevel 1 goto error
 
 echo SUCCESS Build completed successfully
