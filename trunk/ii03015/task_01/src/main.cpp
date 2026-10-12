@@ -36,45 +36,6 @@ static void writeCsv(const std::vector<Line>& lines)
     std::cout << "\nРезультаты сохранены в results.csv\n";
 }
 
-static std::unique_ptr<Model> createModel()
-{
-    while (true)
-    {
-        const int choice = readInteger(
-            "\nВыберите модель:\n"
-            "1 - Model 1.6\n"
-            "2 - Model 2.8\n"
-            "3 - Model 3.10\n"
-            "Ваш выбор: ", 1);
-
-        switch (choice)
-        {
-        case 1:
-        {
-            const double a1 = readReal("a1 = ");
-            const double a2 = readReal("a2 = ");
-            const double a3 = readReal("a3 = ");
-            const double b  = readReal("b  = ");
-            return std::make_unique<Model1_6>(a1, a2, a3, b);
-        }
-        case 2:
-        {
-            const double a = readReal("a = ");
-            const double b = readReal("b = ");
-            const double c = readReal("c = ");
-            return std::make_unique<Model2_8>(a, b, c);
-        }
-        case 3:
-        {
-            const double a = readReal("a = ");
-            const double b = readReal("b = ");
-            return std::make_unique<Model3_10>(a, b);
-        }
-        default:
-            std::cout << "Нет такой модели. Повторите выбор.\n";
-        }
-    }
-}
 
 static int readInteger(const std::string& prompt, int minValue)
 {
@@ -117,6 +78,46 @@ static SignalType choiseSignalType()
             return static_cast<SignalType>(choice);
 
         std::cout << "Нет такого варианта. Повторите.\n";
+    }
+}
+
+static std::unique_ptr<Model> createModel()
+{
+    while (true)
+    {
+        const int choice = readInteger(
+            "\nВыберите модель:\n"
+            "1 - Model 1.6\n"
+            "2 - Model 2.8\n"
+            "3 - Model 3.10\n"
+            "Ваш выбор: ", 1);
+
+        switch (choice)
+        {
+        case 1:
+        {
+            const double a1 = readReal("a1 = ");
+            const double a2 = readReal("a2 = ");
+            const double a3 = readReal("a3 = ");
+            const double b  = readReal("b  = ");
+            return std::make_unique<Model1_6>(a1, a2, a3, b);
+        }
+        case 2:
+        {
+            const double a = readReal("a = ");
+            const double b = readReal("b = ");
+            const double c = readReal("c = ");
+            return std::make_unique<Model2_8>(a, b, c);
+        }
+        case 3:
+        {
+            const double a = readReal("a = ");
+            const double b = readReal("b = ");
+            return std::make_unique<Model3_10>(a, b);
+        }
+        default:
+            std::cout << "Нет такой модели. Повторите выбор.\n";
+        }
     }
 }
 
