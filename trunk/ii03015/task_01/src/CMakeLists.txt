@@ -12,8 +12,8 @@ add_executable(otis_task_01_ii03015
     Model3_10.cpp
     InputSignal.cpp
 )
-add_custom_command(TARGET otis_task_01 POST_BUILD
+add_custom_command(TARGET otis_task_01_ii03015 POST_BUILD
     COMMAND ${CMAKE_COMMAND} -E copy_if_different
         "${CMAKE_CURRENT_SOURCE_DIR}/plot.py"
-        "$<TARGET_FILE_DIR:otis_task_01>/plot.py"
+        "$<TARGET_FILE_DIR:otis_task_01_ii03015>/plot.py"
 )
