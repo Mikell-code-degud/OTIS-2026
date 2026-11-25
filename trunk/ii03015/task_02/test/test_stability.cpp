@@ -5,6 +5,7 @@
 #include <sstream>
 #include <string>
 #include <vector>
+#include <array>
 
 #include "StabilityAnalyzer.h"
 #include "TestUtils.h"
@@ -251,7 +252,7 @@ TEST(StabilityWarning, DescribeReportsCoefficientsRootsAndVerdict)
             const char* name;
         };
 
-        const Case cases[] = {
+        const std::array<Case, 3> cases  = {
             {0.5, 0.2, 0.1, StabilityVerdict::Stable,   "STABLE"},
             {1.0, 0.0, 0.0, StabilityVerdict::Marginal, "MARGINAL"},
             {2.0, 0.0, 0.0, StabilityVerdict::Unstable, "UNSTABLE"},
