@@ -247,7 +247,9 @@ TEST(StabilityWarning, DescribeReportsCoefficientsRootsAndVerdict)
         SCOPED_TRACE("имя вердикта для каждого состояния");
         struct Case
         {
-            double a1, a2, a3;
+            double a1;
+            double a2;
+            double a3;
             StabilityVerdict verdict;
             const char* name;
         };
