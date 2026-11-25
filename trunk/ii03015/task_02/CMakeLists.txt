@@ -2,9 +2,6 @@ cmake_minimum_required(VERSION 3.20)
 
 project(OTIS_Task_02_Variant_6 LANGUAGES CXX)
 
-# ---------------------------------------------------------------------------
-#  Глобальные настройки компилятора
-# ---------------------------------------------------------------------------
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
@@ -13,8 +10,6 @@ if(NOT CMAKE_CONFIGURATION_TYPES AND NOT CMAKE_BUILD_TYPE)
     set(CMAKE_BUILD_TYPE Debug CACHE STRING "" FORCE)
 endif()
 
-# Отдельный подкаталог для каждой конфигурации: иначе Release перезаписывает
-# Debug-бинарники в build/bin, и OpenCppCoverage получает exe без PDB.
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin")
 foreach(config ${CMAKE_CONFIGURATION_TYPES})
     string(TOUPPER "${config}" config_upper)
@@ -23,9 +18,6 @@ endforeach()
 
 option(OTIS_ENABLE_COVERAGE "Включить инструментацию покрытия (gcov/LLVM)" OFF)
 
-# ---------------------------------------------------------------------------
-#  Google Test через FetchContent
-# ---------------------------------------------------------------------------
 include(FetchContent)
 
 set(GTEST_VERSION "1.14.0" CACHE STRING "Версия Google Test")
@@ -51,9 +43,6 @@ endif()
 
 FetchContent_MakeAvailable(googletest)
 
-# ---------------------------------------------------------------------------
-#  Библиотека с логикой (модели + сигналы + устойчивость) - без main()
-# ---------------------------------------------------------------------------
 add_library(otis_core STATIC
     src/Model1_6.cpp
     src/Model2_8.cpp
@@ -83,9 +72,6 @@ if(OTIS_ENABLE_COVERAGE)
     endif()
 endif()
 
-# ---------------------------------------------------------------------------
-#  Основная программа
-# ---------------------------------------------------------------------------
 add_executable(otis_task_02 src/main.cpp)
 target_link_libraries(otis_task_02 PRIVATE otis_core)
 
@@ -94,10 +80,6 @@ add_custom_command(TARGET otis_task_02 POST_BUILD
         "${CMAKE_CURRENT_SOURCE_DIR}/src/plot.py"
         "$<TARGET_FILE_DIR:otis_task_02>/plot.py"
 )
-
-# ---------------------------------------------------------------------------
-#  Тесты
-# ---------------------------------------------------------------------------
 enable_testing()
 
 add_executable(otis_tests
@@ -110,7 +92,6 @@ add_executable(otis_tests
     test/test_stability.cpp
 )
 
-# Свой main() находится в test/test_main.cpp, поэтому gtest_main НЕ подключается.
 target_link_libraries(otis_tests PRIVATE otis_core GTest::gtest GTest::gmock)
 
 if(MSVC)
@@ -125,7 +106,6 @@ gtest_discover_tests(otis_tests
     PROPERTIES LABELS "unit"
 )
 
-# Отдельная цель: собрать и сразу прогнать тесты.
 add_custom_target(run_tests
     COMMAND ${CMAKE_CTEST_COMMAND} --test-dir "${CMAKE_BINARY_DIR}"
             --build-config $<CONFIG> --output-on-failure
