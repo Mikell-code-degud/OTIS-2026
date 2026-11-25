@@ -204,7 +204,7 @@ std::vector<double> StabilityAnalyzer::characteristicPolynomial1_6(double a1, do
 StabilityReport StabilityAnalyzer::analyzeModel1_6(double a1, double a2, double a3)
 {
 
-    const std::vector<double> poly = { -a3, -a2, -a1, 1.0 };
+    const auto poly = std::vector{ -a3, -a2, -a1, 1.0 };
 
     StabilityReport report;
     report.modelName = "Model 1.6 (linear, order 3)";
