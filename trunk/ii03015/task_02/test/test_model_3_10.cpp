@@ -51,7 +51,7 @@ TEST(Model3_10, EulerErrorDecreasesWithSmallerStep)
     {
         Model3_10 model(a, 0.0);
         const int steps = static_cast<int>(std::lround(totalTime / dt));
-        const std::vector<double> values = otis_test::runConstant(model, 1.0, 0.0, steps, dt);
+        const auto values = otis_test::runConstant(model, 1.0, 0.0, steps, dt);
         return std::abs(values.back() - std::exp(-a * dt * steps));
     };
 
