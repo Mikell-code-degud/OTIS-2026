@@ -254,7 +254,7 @@ TEST(StabilityWarning, DescribeReportsCoefficientsRootsAndVerdict)
             const char* name;
         };
 
-        const std::array<Case, 3> cases  = {
+        const std::vector<Case> cases  = {
             {0.5, 0.2, 0.1, StabilityVerdict::Stable,   "STABLE"},
             {1.0, 0.0, 0.0, StabilityVerdict::Marginal, "MARGINAL"},
             {2.0, 0.0, 0.0, StabilityVerdict::Unstable, "UNSTABLE"},
