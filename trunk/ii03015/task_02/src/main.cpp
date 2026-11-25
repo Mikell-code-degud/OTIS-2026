@@ -208,8 +208,7 @@ int main()
     std::cout << "  ПОСТРОЕНИЕ ГРАФИКА\n";
     std::cout << "----------------------------------------------------------------------------\n";
     std::cout << "Запуск: python plot.py\n";
-    int plot_result = system("python plot.py >nul 2>&1");
-    if (plot_result == 0)
+    if (int plot_result = system("python plot.py >nul 2>&1"); plot_result == 0)
         std::cout << "График сохранён в файл: result.png\n";
     else
         std::cout << "Не удалось построить график (убедитесь, что Python и matplotlib установлены).\n";
